@@ -114,3 +114,7 @@ El workflow usa el runner y sube únicamente resultados procesados. No se envía
 El workflow de CI ejecuta el proyecto API real en local en push a main, pull request o ejecución manual. Las ejecuciones de main publican una página con fecha, commit, estado de validación, HTML por caso y logs Robot. Incluye el FAIL intencional descrito arriba.
 
 Cada publicación válida sustituye la anterior en Pages. El ZIP permanece disponible en esa página; el artefacto de Actions de main caduca a los 7 días y los anteriores del mismo workflow se eliminan después de publicar el nuevo. Los PR conservan su artefacto durante 1 día y no publican en Pages. Si no hay reportes válidos, se conserva la publicación anterior. Los archivos generados no se añaden al historial Git.
+
+## Diseño técnico
+
+[Arquitectura, flujo de ejecución y publicación](docs/architecture.md): diagramas de las capas, datos, evidencia, limpieza y CI, con referencias a las rutas reales del proyecto.
