@@ -1,6 +1,6 @@
 # Robot Framework API Testing
 
-Flujos de negocio contra **Demo Users API**, con RequestsLibrary, **RequestReporter 0.6.0** y **RequestLogger 0.1.0**. Cada test genera un HTML independiente, sin conexión y adjuntable a Jira.
+Flujos de negocio contra **Demo Users API**, con RequestsLibrary, **RequestReporter 0.7.0** y **RequestLogger 0.1.0**. Cada test genera un HTML independiente, sin conexión y adjuntable a Jira.
 
 [Swagger de la API](https://angel-valdezzz.github.io/demo-users-api/) · [Proyecto de la API](https://github.com/angel-valdezzz/demo-users-api) · [Manual de RequestReporter](https://angel-valdezzz.github.io/robotframework-request-reporter/) · [Keywords](https://angel-valdezzz.github.io/robotframework-request-reporter/keywords/) · [Manual de RequestLogger](https://angel-valdezzz.github.io/robotframework-request-logger/)
 
@@ -118,3 +118,14 @@ Cada publicación válida sustituye la anterior en Pages. El ZIP permanece dispo
 ## Diseño técnico
 
 [Arquitectura, flujo de ejecución y publicación](docs/architecture.md): diagramas de las capas, datos, evidencia, limpieza y CI, con referencias a las rutas reales del proyecto.
+
+## Reporte actualizado y personalización opcional
+
+Request Reporter 0.7.0 muestra resumen, peticiones y fallos con navegación uniforme, controles claro/oscuro, fecha de fin y zona horaria. La pestaña de peticiones empieza por la primera petición del caso; desde Fallos se abre la validación correspondiente. Las keywords `Capture Response`, `Assert` y `Set Case Metadata` conservan su sintaxis.
+
+```bash
+poetry run python scripts/run_demo.py --local
+poetry run python scripts/run_demo.py --local --language es --brand-config resources/config/report-brand.json
+```
+
+La segunda ejecución utiliza la configuración de ejemplo abierta y gratuita. Para cambiar también el logo, agrega `"logo": "logo.png"` al JSON y coloca la imagen junto al archivo. CI regenera diez reportes de caso y publica sus evidencias usando las dependencias fijadas en Poetry.

@@ -1,0 +1,9 @@
+{
+  "name": "Example QA",
+  "palette": {
+    "primary": "#164e63",
+    "accent": "#155e75",
+    "primary_dark": "#67e8f9",
+    "accent_dark": "#7dd3fc"
+  }
+}

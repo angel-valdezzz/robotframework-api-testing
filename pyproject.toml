@@ -8,7 +8,7 @@ dependencies = [
     "robotframework-paylo (==0.1.0)",
     "robotframework-requests==0.9.7",
     "robotframework-datadriver==1.11.2",
-    "robotframework-request-reporter (==0.6.1)",
+    "robotframework-request-reporter (==0.7.0)",
     "robotframework-request-logger (==0.1.0)",
 ]
 

@@ -39,7 +39,7 @@ def start_local_api():
     return server, thread, listener, f"http://127.0.0.1:{port}", key
 
 
-def run_suite(suite, output, mode, console, env, language="en"):
+def run_suite(suite, output, mode, console, env, language="en", brand_config=None):
     key = env["DEMO_API_KEY"].encode()
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="users-demo-") as staging:
@@ -56,6 +56,7 @@ def run_suite(suite, output, mode, console, env, language="en"):
                 f"LOGGER_MODE:{mode}",
                 "--variable",
                 f"REPORT_LANGUAGE:{language}",
+                *(["--variable", f"REPORT_BRAND_CONFIG:{brand_config}"] if brand_config else []),
                 str(suite),
             ],
             cwd=ROOT,
@@ -107,7 +108,13 @@ def main():
     parser.add_argument("--logger-mode", choices=["summary", "failures", "full"], default="summary")
     parser.add_argument("--console", choices=["verbose", "quiet", "none"], default="quiet")
     parser.add_argument("--language", choices=["en", "es"], default="en")
+    parser.add_argument("--brand-config", type=Path, help="Optional local report branding JSON")
     args = parser.parse_args()
+    brand_config = str(args.brand_config.resolve()) if args.brand_config else None
+    if brand_config:
+        from request_reporter.branding import load_branding
+
+        load_branding(brand_config)
     env = os.environ.copy()
     server = thread = listener = None
     if args.local:
@@ -122,7 +129,13 @@ def main():
             if output.exists():
                 shutil.rmtree(output)
             run_suite(
-                ROOT / "tests" / suite, output, args.logger_mode, args.console, env, args.language
+                ROOT / "tests" / suite,
+                output,
+                args.logger_mode,
+                args.console,
+                env,
+                args.language,
+                brand_config,
             )
     finally:
         if server is not None:

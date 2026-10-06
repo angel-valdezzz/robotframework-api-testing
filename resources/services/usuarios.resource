@@ -2,14 +2,15 @@
 Library     RequestsLibrary
 Library     Paylo
 Library     Collections
-Library     RequestReporter    language=${REPORT_LANGUAGE}
+Library     RequestReporter    language=${REPORT_LANGUAGE}    brand_config=${REPORT_BRAND_CONFIG}
 Library     RequestLogger    mode=${LOGGER_MODE}
 Library     ../assertions/ConsoleAssertions.py
 Resource    ../config/http.resource
 
 
 *** Variables ***
-${REPORT_LANGUAGE}    en
+${REPORT_LANGUAGE}        en
+${REPORT_BRAND_CONFIG}    ${NONE}
 
 
 *** Keywords ***
