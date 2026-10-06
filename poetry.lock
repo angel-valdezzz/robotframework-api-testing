@@ -927,6 +927,22 @@ robotframework = ">=4.0.2,<8.0"
 xls = ["openpyxl", "pandas", "xlrd (>=1.2.0)"]
 
 [[package]]
+name = "robotframework-paylo"
+version = "0.1.0"
+description = "Paylo: safe, type-preserving JSON payload templates."
+optional = false
+python-versions = ">=3.10"
+groups = ["main"]
+files = [
+    {file = "robotframework_paylo-0.1.0-py3-none-any.whl", hash = "sha256:6c674195f7be61ac7961d64ab29db3a73ed60822a437420ec3d7e41c775e736b"},
+    {file = "robotframework_paylo-0.1.0.tar.gz", hash = "sha256:c278be51399a1057667fa723a01f8bbedbb28875ce2733ef7fdda0616b172780"},
+]
+
+[package.extras]
+dev = ["mkdocs-git-revision-date-localized-plugin (>=1.5,<2)", "mkdocs-material (>=9.7,<10)", "pygments (>=2.19,<3)", "pytest (>=8,<10)", "pytest-cov (>=6,<8)", "ruff (>=0.15,<0.16)", "twine (>=6,<7)"]
+robot = ["robotframework (>=7,<8)"]
+
+[[package]]
 name = "robotframework-request-logger"
 version = "0.1.0"
 description = "Protected HTTP request and response console logging for Robot Framework with Rich."
@@ -945,14 +961,14 @@ robotframework = ">=7.5,<8"
 
 [[package]]
 name = "robotframework-request-reporter"
-version = "0.5.0"
+version = "0.5.1"
 description = "Standalone HTML API evidence reports for each Robot Framework test case."
 optional = false
 python-versions = "<4,>=3.12"
 groups = ["main"]
 files = [
-    {file = "robotframework_request_reporter-0.5.0-py3-none-any.whl", hash = "sha256:208ea4d5c17fc4af5f5d27ef7abed20965eb4bc23a2e13a6fe8b18f1287dd48d"},
-    {file = "robotframework_request_reporter-0.5.0.tar.gz", hash = "sha256:e31fed65af911f04a2a976b018564d97f386a56eecdcf51c43c9f4489ab90c58"},
+    {file = "robotframework_request_reporter-0.5.1-py3-none-any.whl", hash = "sha256:9a254292b2c66979ebfcb30c030c9b49f73569365dff5fb234fc097224c57545"},
+    {file = "robotframework_request_reporter-0.5.1.tar.gz", hash = "sha256:2e27726c5e9e436471d888a30f56acd0c9b4353fb4d61e2dba0421c66d3e0222"},
 ]
 
 [package.dependencies]
@@ -1175,4 +1191,4 @@ standard = ["httptools (>=0.8.0)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "e3a4ec9c9df2cdfa16227e1447999674749b7bc37777039a6a96f212d2e430f3"
+content-hash = "60d208a4579216491385e2c5646b5f718f5ec009376e765e25cc38e8787bd1e9"

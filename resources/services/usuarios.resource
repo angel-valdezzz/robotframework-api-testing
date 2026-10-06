@@ -1,5 +1,6 @@
 *** Settings ***
 Library     RequestsLibrary
+Library     Paylo
 Library     Collections
 Library     RequestReporter
 Library     RequestLogger    mode=${LOGGER_MODE}
@@ -26,7 +27,8 @@ Enviar request de usuario
 
 Crear usuario
     [Arguments]    ${name}    ${email}    ${role}=support
-    VAR    &{body}    name=${name}    email=${email}    role=${role}
+    VAR    &{values}    name=${name}    email=${email}    role=${role}
+    ${body}=    Render JSON File    ${CURDIR}/../../data/payloads/create-user.json    ${values}
     ${response}    ${request_id}=    Enviar request de usuario    POST    /users    ${body}
     IF    ${response.status_code} == 201
         Append To List    ${CREATED_USERS}    ${response.json()}[id]
@@ -46,13 +48,15 @@ Buscar usuarios
 
 Reemplazar usuario
     [Arguments]    ${user_id}    ${name}    ${email}
-    VAR    &{body}    name=${name}    email=${email}
+    VAR    &{values}    name=${name}    email=${email}
+    ${body}=    Render JSON File    ${CURDIR}/../../data/payloads/replace-user.json    ${values}
     ${response}    ${request_id}=    Enviar request de usuario    PUT    /users/${user_id}    ${body}
     RETURN    ${response}    ${request_id}
 
 Desactivar usuario
     [Arguments]    ${user_id}
-    VAR    &{body}    active=${FALSE}
+    VAR    &{values}    active=${FALSE}
+    ${body}=    Render JSON File    ${CURDIR}/../../data/payloads/deactivate-user.json    ${values}
     ${response}    ${request_id}=    Enviar request de usuario    PATCH    /users/${user_id}    ${body}
     RETURN    ${response}    ${request_id}
 

@@ -9,3 +9,5 @@ results-ddt/
 
 .robocop_cache/
 .ruff_cache/
+
+report-site/

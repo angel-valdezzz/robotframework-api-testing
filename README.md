@@ -1,6 +1,6 @@
 # Robot Framework API Testing
 
-Flujos de negocio contra **Demo Users API**, con RequestsLibrary, **RequestReporter 0.5.0** y **RequestLogger 0.1.0**. Cada test genera un HTML independiente, sin conexión y adjuntable a Jira.
+Flujos de negocio contra **Demo Users API**, con RequestsLibrary, **RequestReporter 0.5.1** y **RequestLogger 0.1.0**. Cada test genera un HTML independiente, sin conexión y adjuntable a Jira.
 
 [Swagger de la API](https://angel-valdezzz.github.io/demo-users-api/) · [Proyecto de la API](https://github.com/angel-valdezzz/demo-users-api) · [Manual de RequestReporter](https://angel-valdezzz.github.io/robotframework-request-reporter/) · [Keywords](https://angel-valdezzz.github.io/robotframework-request-reporter/keywords/) · [Manual de RequestLogger](https://angel-valdezzz.github.io/robotframework-request-logger/)
 
@@ -42,6 +42,23 @@ poetry run python scripts/run_demo.py --local
 
 El runner verifica estos resultados; un fallo diferente hace fallar la ejecución. Guarda cuatro HTML en `results/cases/`, dos en `results-ddt/cases/`, logs de Robot y `console.log`. Regenera solamente esos dos directorios conocidos. Un HTTP 409/404 esperado no convierte una assertion en FAIL.
 
+## Payloads con Paylo
+
+Paylo 0.1.0 carga las plantillas JSON de `data/payloads/`. Los datos del escenario o DataDriver se pasan explícitamente como variables; los payloads de POST, PUT y PATCH no se construyen por concatenación de texto.
+
+```json
+{"name": "{{name}}", "email": "{{email}}", "role": "{{role}}"}
+```
+
+```robotframework
+Library    Paylo
+
+VAR    &{values}    name=Ana    email=ana@example.com    role=support
+${body}=    Render JSON File    ${CURDIR}/data/payloads/create-user.json    ${values}
+```
+
+La desactivación usa `active=${FALSE}`: Paylo conserva el booleano JSON, no el texto `"False"`. Los parámetros de consulta siguen siendo diccionarios normales.
+
 ## Consola
 
 ```bash
@@ -75,3 +92,11 @@ CI ejecuta lint, formato, Robot y verificación local. **Live users API demo** e
 | Secret | `DEMO_API_KEY` | Credencial autorizada para Actions |
 
 El workflow usa el runner y sube únicamente resultados procesados. No se envían credenciales de Render a los tests. La integración externa queda lista para ejecutarse cuando el servicio esté desplegado y estos valores estén configurados.
+
+## Última ejecución publicada
+
+[Abrir últimos reportes](https://angel-valdezzz.github.io/robotframework-api-testing/) · [Descargar ZIP](https://angel-valdezzz.github.io/robotframework-api-testing/reports.zip)
+
+El workflow de CI ejecuta el proyecto API real en local en push a main, pull request o ejecución manual. Las ejecuciones de main publican una página con fecha, commit, estado de validación, HTML por caso y logs Robot. Incluye el FAIL intencional descrito arriba.
+
+Cada publicación válida sustituye la anterior en Pages. El ZIP permanece disponible en esa página; el artefacto de Actions de main caduca a los 7 días y los anteriores del mismo workflow se eliminan después de publicar el nuevo. Los PR conservan su artefacto durante 1 día y no publican en Pages. Si no hay reportes válidos, se conserva la publicación anterior. Los archivos generados no se añaden al historial Git.
