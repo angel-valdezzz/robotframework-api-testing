@@ -39,7 +39,7 @@ def start_local_api():
     return server, thread, listener, f"http://127.0.0.1:{port}", key
 
 
-def run_suite(suite, output, mode, console, env):
+def run_suite(suite, output, mode, console, env, language="en"):
     key = env["DEMO_API_KEY"].encode()
     output.mkdir(parents=True, exist_ok=True)
     with tempfile.TemporaryDirectory(prefix="users-demo-") as staging:
@@ -54,6 +54,8 @@ def run_suite(suite, output, mode, console, env):
                 console,
                 "--variable",
                 f"LOGGER_MODE:{mode}",
+                "--variable",
+                f"REPORT_LANGUAGE:{language}",
                 str(suite),
             ],
             cwd=ROOT,
@@ -104,6 +106,7 @@ def main():
     parser.add_argument("--local", action="store_true", help="Use dev dependency Demo Users API")
     parser.add_argument("--logger-mode", choices=["summary", "failures", "full"], default="summary")
     parser.add_argument("--console", choices=["verbose", "quiet", "none"], default="quiet")
+    parser.add_argument("--language", choices=["en", "es"], default="en")
     args = parser.parse_args()
     env = os.environ.copy()
     server = thread = listener = None
@@ -118,7 +121,9 @@ def main():
             output = ROOT / folder
             if output.exists():
                 shutil.rmtree(output)
-            run_suite(ROOT / "tests" / suite, output, args.logger_mode, args.console, env)
+            run_suite(
+                ROOT / "tests" / suite, output, args.logger_mode, args.console, env, args.language
+            )
     finally:
         if server is not None:
             server.should_exit = True

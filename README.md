@@ -1,6 +1,6 @@
 # Robot Framework API Testing
 
-Flujos de negocio contra **Demo Users API**, con RequestsLibrary, **RequestReporter 0.5.1** y **RequestLogger 0.1.0**. Cada test genera un HTML independiente, sin conexión y adjuntable a Jira.
+Flujos de negocio contra **Demo Users API**, con RequestsLibrary, **RequestReporter 0.6.0** y **RequestLogger 0.1.0**. Cada test genera un HTML independiente, sin conexión y adjuntable a Jira.
 
 [Swagger de la API](https://angel-valdezzz.github.io/demo-users-api/) · [Proyecto de la API](https://github.com/angel-valdezzz/demo-users-api) · [Manual de RequestReporter](https://angel-valdezzz.github.io/robotframework-request-reporter/) · [Keywords](https://angel-valdezzz.github.io/robotframework-request-reporter/keywords/) · [Manual de RequestLogger](https://angel-valdezzz.github.io/robotframework-request-logger/)
 
@@ -38,9 +38,13 @@ poetry run python scripts/run_demo.py --local
 | USR-002 | PASS | Correo duplicado y HTTP 409 esperado |
 | USR-003 | FAIL intencional | Rol sales comparado con admin; evidencia del fallo |
 | USR-004 | SKIP | Escenario completo pendiente; no assertions SKIP |
+| USR-005 | PASS | Activación, desactivación, conflictos 409 y estadísticas |
+| USR-006 | PASS | Payload, UUID y paginación inválidos (422) |
+| USR-007 | PASS | Credenciales ausentes o inválidas (401) |
+| USR-008 | PASS | Filtros combinados, paginación y usuarios inactivos |
 | USR-DDT Soporte / Ventas | PASS | DataDriver y roles de usuario |
 
-El runner verifica estos resultados; un fallo diferente hace fallar la ejecución. Guarda cuatro HTML en `results/cases/`, dos en `results-ddt/cases/`, logs de Robot y `console.log`. Regenera solamente esos dos directorios conocidos. Un HTTP 409/404 esperado no convierte una assertion en FAIL.
+El runner verifica estos resultados; un fallo diferente hace fallar la ejecución. Guarda ocho HTML en `results/cases/`, dos en `results-ddt/cases/`, logs de Robot y `console.log`. Regenera solamente esos dos directorios conocidos. Un HTTP 409/404 esperado no convierte una assertion en FAIL.
 
 ## Payloads con Paylo
 
@@ -58,6 +62,16 @@ ${body}=    Render JSON File    ${CURDIR}/data/payloads/create-user.json    ${va
 ```
 
 La desactivación usa `active=${FALSE}`: Paylo conserva el booleano JSON, no el texto `"False"`. Los parámetros de consulta siguen siendo diccionarios normales.
+
+## Idioma de los reportes
+
+La interfaz se genera en inglés por defecto. Para español:
+
+```bash
+poetry run python scripts/run_demo.py --local --language es
+```
+
+El idioma no traduce los datos de la API ni los nombres de los casos.
 
 ## Consola
 

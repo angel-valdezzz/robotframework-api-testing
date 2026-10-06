@@ -2,10 +2,14 @@
 Library     RequestsLibrary
 Library     Paylo
 Library     Collections
-Library     RequestReporter
+Library     RequestReporter    language=${REPORT_LANGUAGE}
 Library     RequestLogger    mode=${LOGGER_MODE}
 Library     ../assertions/ConsoleAssertions.py
 Resource    ../config/http.resource
+
+
+*** Variables ***
+${REPORT_LANGUAGE}    en
 
 
 *** Keywords ***
@@ -80,3 +84,13 @@ Limpiar usuarios creados
             Fail    No se pudo limpiar el usuario ${user_id}: HTTP ${response.status_code}
         END
     END
+
+Consultar estadísticas
+    ${response}    ${request_id}=    Enviar request de usuario    GET    /users/statistics
+    RETURN    ${response}    ${request_id}
+
+Cambiar estado de usuario
+    [Arguments]    ${user_id}    ${operation}
+    Should Be True    $operation in ('activate', 'deactivate')
+    ${response}    ${request_id}=    Enviar request de usuario    POST    /users/${user_id}/${operation}
+    RETURN    ${response}    ${request_id}
