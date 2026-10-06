@@ -5,9 +5,10 @@ description = "Executable Robot Framework API example with independent case repo
 requires-python = ">=3.12,<4"
 dependencies = [
     "robotframework==7.5",
+    "robotframework-paylo (==0.1.0)",
     "robotframework-requests==0.9.7",
     "robotframework-datadriver==1.11.2",
-    "robotframework-request-reporter (==0.5.0)",
+    "robotframework-request-reporter (==0.5.1)",
     "robotframework-request-logger (==0.1.0)",
 ]
 
