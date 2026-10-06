@@ -280,8 +280,8 @@ uvicorn = ">=0.30,<1"
 [package.source]
 type = "git"
 url = "https://github.com/angel-valdezzz/demo-users-api.git"
-reference = "63bb25c5cfd808a61a2efce275b266fa5620ea19"
-resolved_reference = "63bb25c5cfd808a61a2efce275b266fa5620ea19"
+reference = "971be3caf9cd88375c2dab8c935772c5fd2b95eb"
+resolved_reference = "971be3caf9cd88375c2dab8c935772c5fd2b95eb"
 
 [[package]]
 name = "dnspython"
@@ -961,14 +961,14 @@ robotframework = ">=7.5,<8"
 
 [[package]]
 name = "robotframework-request-reporter"
-version = "0.6.0"
+version = "0.6.1"
 description = "Standalone HTML API evidence reports for each Robot Framework test case."
 optional = false
 python-versions = "<4,>=3.12"
 groups = ["main"]
 files = [
-    {file = "robotframework_request_reporter-0.6.0-py3-none-any.whl", hash = "sha256:a87d56e1bba9e1bee82685eb6cbdd5b2284461c1abbdf143b66145bfa38d9691"},
-    {file = "robotframework_request_reporter-0.6.0.tar.gz", hash = "sha256:477981f7cebbb6ddf51ef2b48c0b9fa5205a2e78be177bd2c17a1d5d5a909a15"},
+    {file = "robotframework_request_reporter-0.6.1-py3-none-any.whl", hash = "sha256:b85f485caa7fa994f54ce47c28b27a84fa9d97f857b0ec16192b712360a7ddbe"},
+    {file = "robotframework_request_reporter-0.6.1.tar.gz", hash = "sha256:e879c35a5256edcecc01f41435041a30cddcd58ebc9fff72288fc043a73846cc"},
 ]
 
 [package.dependencies]
@@ -1191,4 +1191,4 @@ standard = ["httptools (>=0.8.0)", "python-dotenv (>=0.13)", "pyyaml (>=5.1)", "
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12,<4"
-content-hash = "b003ee0c21a5b50e9953f5cb3d6d1a8d42f695bcd38091e9293675a06c735d3d"
+content-hash = "643fb99453ef6352736d78c0ef480ee5cde2f5affc0e7b1d32fcda1863f770e8"
