@@ -8,7 +8,7 @@ dependencies = [
     "robotframework-paylo (==0.1.0)",
     "robotframework-requests==0.9.7",
     "robotframework-datadriver==1.11.2",
-    "robotframework-request-reporter (==0.6.0)",
+    "robotframework-request-reporter (==0.6.1)",
     "robotframework-request-logger (==0.1.0)",
 ]
 
@@ -20,7 +20,7 @@ requires-poetry = ">=2.5.1,<3"
 dev = [
     "robotframework-robocop (>=9.1.0,<10.0.0)",
     "ruff (>=0.16.9,<0.17.0)",
-    "demo-users-api @ git+https://github.com/angel-valdezzz/demo-users-api.git@63bb25c5cfd808a61a2efce275b266fa5620ea19"
+    "demo-users-api @ git+https://github.com/angel-valdezzz/demo-users-api.git@971be3caf9cd88375c2dab8c935772c5fd2b95eb"
 ]
 
 [tool.robocop]
